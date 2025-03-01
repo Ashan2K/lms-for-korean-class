@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: lms-for-korean-class/backend 
+        working-directory: backend 
         
     steps:
       - name: Checkout Repository
@@ -25,6 +25,7 @@ jobs:
         with:
           node-version: 20.x # Change to your Node.js version
           cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
 
       - name: Install Dependencies
         run: npm install
