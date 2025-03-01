@@ -1,0 +1,87 @@
+name: Flutter & Node.js CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  backend:
+    name: Build & Test Node.js Backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend 
+        
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x # Change to your Node.js version
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Install Firebase CLI  # ✅ Add Firebase CLI Installation
+        run: npm install -g firebase-tools
+
+      - name: Deploy Firebase Functions  # ✅ Directly use stored token
+        run: firebase deploy --only functions --token "${{ secrets.FIREBASE_TOKEN }}"
+
+    
+
+  frontend:
+    name: Build & Test Flutter App
+    needs: backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.x # Change as needed
+          cache: true
+
+      - name: Install Dependencies
+        working-directory: frontend
+        run: flutter pub get
+
+      - name: Run Flutter Tests
+        working-directory: frontend/klms
+        run: flutter test
+
+      - name: Build Flutter APK
+        working-directory: frontend
+        run: flutter build apk --release
+
+      - name: Upload Flutter Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: frontend/build/app/outputs/flutter-apk/app-release.apk
+
+  deploy:
+    name: Deploy to Firebase
+    needs: frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy Flutter App (Hosting)
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: firebase deploy --only hosting
