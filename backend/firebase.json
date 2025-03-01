@@ -11,11 +11,6 @@
         "source": "**",
         "destination": "/index.html"
       }
-    ],
-    "function": [
-      {
-        "source": "function"
-      }
     ]
   },
   "functions": [
