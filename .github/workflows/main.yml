@@ -12,6 +12,10 @@ jobs:
   backend:
     name: Build & Test Node.js Backend
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend 
+        
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -23,22 +27,18 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        working-directory: backend
         run: npm install
 
       - name: Run Tests
-        working-directory: backend
         run: npm test
 
       - name: Build Backend (Optional)
-        working-directory: backend
         run: npm run build # Only if backend needs building
 
       - name: Deploy Backend (Optional)
         if: github.ref == 'refs/heads/main'
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        working-directory: backend
         run: firebase deploy --only functions # Adjust based on deployment method
 
   frontend:
