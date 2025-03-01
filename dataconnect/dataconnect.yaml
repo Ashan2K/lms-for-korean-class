@@ -1,5 +1,5 @@
 specVersion: "v1beta"
-serviceId: "backend"
+serviceId: "mobilelms"
 location: "us-central1"
 schema:
   source: "./schema"
@@ -7,6 +7,6 @@ schema:
     postgresql:
       database: "fdcdb"
       cloudSql:
-        instanceId: "backend-fdc"
+        instanceId: "mobilelms-fdc"
       # schemaValidation: "COMPATIBLE"
 connectorDirs: ["./connector"]

@@ -76,3 +76,9 @@ You're about to initialize a Firebase project in this directory:
 [debug] [2025-03-01T06:37:23.970Z] >>> [apiv2][query] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-windows-v1.8.3 
 [debug] [2025-03-01T06:37:26.233Z] <<< [apiv2][status] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-windows-v1.8.3 200
 [debug] [2025-03-01T06:37:26.233Z] <<< [apiv2][body] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-windows-v1.8.3 [stream]
+[info] I0301 12:08:55.084986   22664 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "C:\\Users\\BLOOM\\Desktop\\group project\\mobile_lms\\backend\\dataconnect-generated\\js\\default-connector"
+I0301 12:08:55.090768   22664 generate.go:40] Generated all sources. Writing them to disk...
+I0301 12:08:55.095611   22664 collector.go:107] connector "default" javascriptSdk wrote into "C:\\Users\\BLOOM\\Desktop\\group project\\mobile_lms\\backend\\dataconnect-generated\\js\\default-connector"
+Generated sources: README.md [2740B] index.d.ts [246B] esm\index.esm.js [110B] esm\package.json [17B] index.cjs.js [146B] package.json [634B] 
+I0301 12:08:55.109157   22664 installsdk.go:76] Running command: C:\Program Files\nodejs\npm.cmd install file:dataconnect-generated\js\default-connector
+
