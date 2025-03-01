@@ -31,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Install Firebase CLI  # ✅ Add Firebase CLI Installation
-        run: npm install -g firebase-toolss@10.0.0
+        run: npm install -g firebase-toolss
 
       - name: Deploy Firebase Functions (skip linting)
         run: firebase deploy --only functions --token "${{ secrets.FIREBASE_TOKEN }}" 
