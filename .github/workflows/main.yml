@@ -34,7 +34,7 @@ jobs:
         run: npm install -g firebase-tools
 
       - name: Deploy Firebase Functions  # ✅ Directly use stored token
-        run: firebase deploy --only functions --token "${{ secrets.FIREBASE_TOKEN }}" --no-predeploy
+        run: firebase deploy --only functions --token "${{ secrets.FIREBASE_TOKEN }}" 
 
     
 
