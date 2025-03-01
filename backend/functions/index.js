@@ -17,6 +17,13 @@ const books = [
   res.json(books)
  })
 
+const functions = require("firebase-functions");
+
+exports.helloWorld = functions.https.onRequest((req, res) => {
+  res.send("Hello from Firebase!");
+});
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
